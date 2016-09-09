@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<meta charset="utf-8">
+<title>单行滚动</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<style type="text/css">
+body,html,ul,li{padding:0;margin:0;list-style:none;}
+.lscrollwapper{width:300px;height:100px;text-align:center;background:#ccc;margin:50px auto;font-size:20px;}
+.lscroll{width:300px;height:20px;border:1px solid;overflow:hidden;}
+</style>
+<body>
+<div class="lscrollwapper">
+	<div class="lscroll">
+		<ul class="linescroll">
+			<li>我是第一行</li>
+			<li>我是第二行</li>
+			<li>我是第三行</li>
+		</ul>
+	</div>
+
+</div>
+<script type="text/javascript">
+	$.fn.extend({
+			lineScroll:function(speed){
+				var obj=$(this);
+				var t_height=-$(obj).find("li:first").height();
+				setInterval(function(){
+				$(obj).find("li:first").animate({"marginTop":t_height+"px"},speed,function(){
+					$(this).css({"marginTop":"0"});
+					$(this).appendTo($(this).parent());
+				});	
+				},2000);
+			}
+	});
+		$(function(){
+			
+				$(".linescroll").lineScroll(500);
+			
+		});
+</script>
+</body>
+</html>
